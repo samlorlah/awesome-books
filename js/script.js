@@ -2,30 +2,51 @@ const addBookForm = document.getElementById("add-books-form");
 const bookList = document.querySelector(".book-list");
 
 let bookLists = [];
+let newBook; // variable for book object that's pushed in array
+let title;
+let author;
 
-const addBook = () => {
-    bookList.innerHTML = "";
-    bookLists.forEach((book, index) => {
-        const bookFrag = document.createRange().createContextualFragment(`
-            <div>
-                <p>${book.title}</p>       
-                <p>${book.author}</p>
-                <button>Remove</button>
-                <hr>
-            </div>
-        `);
-        bookList.append(bookFrag);
-    })
+function addBook(bookObject){
+  bookLists.push(bookObject);
+
+  localStorage.setItem('booksCollection', JSON.stringify(bookLists));
+  title.value = '';
+  author.value = '';
+  
+  displayBook(bookObject, bookLists.length - 1);
+}
+
+function displayBook(bookObject, index){
+  const bookInfo = document.createElement('div');
+  bookInfo.classList = 'bookInfo';
+  bookInfo.id = index;
+
+  bookInfo.innerHTML = `
+    <p class="book-name">${newBook.title}</p>
+    <p class="book-author">${newBook.author}</p>
+  `;
+
+  const removeBtn = document.createElement('button');
+  removeBtn.classList = 'remove-btn';
+  removeBtn.innerText = 'Remove';
+
+  const hrLine = document.createElement('hr');
+
+  bookInfo.appendChild(removeBtn);
+  bookInfo.appendChild(hrLine);
+  bookList.prepend(bookInfo);
 }
 
 addBookForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    let title = document.querySelector(".titleField");
-    let author = document.querySelector(".authorField");
-    const newBook = {
-        title: title.value,
-        author: author.value
-    }
-    bookLists.push(newBook);
-    addBook();
-})
+  e.preventDefault();
+  
+  title = document.querySelector(".titleField");
+  author = document.querySelector(".authorField");
+  
+  newBook = {
+    title: title.value,
+    author: author.value
+  }
+
+  addBook(newBook);
+});
