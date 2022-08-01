@@ -1,10 +1,36 @@
 const addBookForm = document.getElementById("add-books-form");
 const bookList = document.querySelector(".book-list");
 
-let bookLists = [];
+let storedBooks = JSON.parse(localStorage.getItem("booksCollection"));
+let bookLists = storedBooks ? storedBooks : [];
 let newBook; // variable for book object that's pushed in array
 let title;
 let author;
+
+bookLists.forEach((book, index) => {
+    const bookInfo = document.createElement("div");
+    bookInfo.classList = "bookInfo";
+    bookInfo.id = index;
+
+    bookInfo.innerHTML = `
+        <p class="book-name">${book.title}</p>
+        <p class="book-author">${book.author}</p>
+    `;
+
+    const removeBtn = document.createElement("button");
+    removeBtn.classList = "remove-btn";
+    removeBtn.innerText = "Remove";
+
+    const hrLine = document.createElement("hr");
+
+    bookInfo.appendChild(removeBtn);
+    bookInfo.appendChild(hrLine);
+    bookList.prepend(bookInfo);
+
+    removeBtn.onclick = () => {
+        removeBook(book, index);
+    };
+})
 
 function addBook(bookObject){
   bookLists.push(bookObject);
@@ -55,11 +81,18 @@ addBookForm.addEventListener('submit', function(e){
   
   title = document.querySelector(".titleField");
   author = document.querySelector(".authorField");
-  
-  newBook = {
-    title: title.value,
-    author: author.value
-  }
 
-  addBook(newBook);
+  if
+  (title.value !== '' && author.value !== '') {
+    newBook = {
+        title: title.value,
+        author: author.value
+    }
+
+    addBook(newBook);
+
+    title.value = '';
+    author.value = '';
+  }
+  
 });
