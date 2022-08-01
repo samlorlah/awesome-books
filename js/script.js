@@ -35,6 +35,19 @@ function displayBook(bookObject, index){
   bookInfo.appendChild(removeBtn);
   bookInfo.appendChild(hrLine);
   bookList.prepend(bookInfo);
+
+  removeBtn.onclick = () => {
+    removeBook(bookObject, index);
+  };
+}
+
+function removeBook(bookObject, index){
+  const bookInfo2 = document.getElementById(index);
+  const { title, author } = bookObject;
+
+  bookLists = bookLists.filter((book) => book.title !== title && book.author !== author);
+  localStorage.setItem('booksCollection', JSON.stringify(bookLists));
+  bookList.removeChild(bookInfo2);
 }
 
 addBookForm.addEventListener('submit', function(e){
