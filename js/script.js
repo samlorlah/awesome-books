@@ -6,46 +6,44 @@ let newBook; // variable for book object that's pushed in array
 let title;
 let author;
 
-
 class Books {
   static removeBook(bookObject, index) {
     const bookInfo2 = document.getElementById(index);
     const { title, author } = bookObject;
-  
+
     bookLists = bookLists.filter((book) => book.title !== title && book.author !== author);
     localStorage.setItem('booksCollection', JSON.stringify(bookLists));
     bookList.removeChild(bookInfo2);
   }
-  
+
   static displayBook(bookObject, index) {
     const bookInfo = document.createElement('div');
     bookInfo.classList = 'bookInfo';
     bookInfo.id = index;
-  
+
     bookInfo.innerHTML = `
       <p class="book-details">"${bookObject.title}" by ${bookObject.author}</p>
     `;
-  
-  
+
     const removeBtn = document.createElement('button');
     removeBtn.classList = 'remove-btn';
     removeBtn.innerText = 'Remove';
-  
+
     bookInfo.appendChild(removeBtn);
     bookList.prepend(bookInfo);
-  
+
     removeBtn.onclick = () => {
       Books.removeBook(bookObject, index);
     };
   }
-  
+
   static addBook(bookObject) {
     bookLists.push(bookObject);
-  
+
     localStorage.setItem('booksCollection', JSON.stringify(bookLists));
     title.value = '';
     author.value = '';
-  
+
     Books.displayBook(bookObject, bookLists.length - 1);
   }
 }
