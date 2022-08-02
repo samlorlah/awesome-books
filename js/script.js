@@ -23,18 +23,15 @@ class Books {
     bookInfo.id = index;
   
     bookInfo.innerHTML = `
-      <p class="book-name">${bookObject.title}</p>
-      <p class="book-author">${bookObject.author}</p>
+      <p class="book-details">"${bookObject.title}" by ${bookObject.author}</p>
     `;
+  
   
     const removeBtn = document.createElement('button');
     removeBtn.classList = 'remove-btn';
     removeBtn.innerText = 'Remove';
   
-    const hrLine = document.createElement('hr');
-  
     bookInfo.appendChild(removeBtn);
-    bookInfo.appendChild(hrLine);
     bookList.prepend(bookInfo);
   
     removeBtn.onclick = () => {
