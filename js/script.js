@@ -1,8 +1,7 @@
 const addBookForm = document.getElementById('add-books-form');
 const bookList = document.querySelector('.book-list');
 
-const storedBooks = JSON.parse(localStorage.getItem('booksCollection'));
-let bookLists = storedBooks || [];
+let bookLists = [];
 let newBook; // variable for book object that's pushed in array
 let title;
 let author;
