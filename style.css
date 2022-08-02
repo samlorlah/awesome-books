@@ -1,10 +1,10 @@
 *,
 *::before,
 *::after {
-  -webkit-box-sizing: border-box;  /* for Google Chrome and Apple Safari */
-  -moz-box-sizing: border-box;    /* for Mozilla Firefox */
-  -ms-box-sizing: border-box;   /* for Microsoft's Internet Explorer */
-  box-sizing: border-box;       /* box-sizing is a property allows us to change exactly how the box-model works  */
+  -webkit-box-sizing: border-box; /* for Google Chrome and Apple Safari */
+  -moz-box-sizing: border-box; /* for Mozilla Firefox */
+  -ms-box-sizing: border-box; /* for Microsoft's Internet Explorer */
+  box-sizing: border-box; /* box-sizing is a property allows us to change exactly how the box-model works  */
 }
 
 html {
@@ -18,15 +18,17 @@ body {
   background-color: rgb(255, 255, 255);
 
   /*  position: relative; */
-  min-height: 100vh;  /* vh (viewport height as unit of measure)) */
+  min-height: 100vh; /* vh (viewport height as unit of measure)) */
   margin: 0;
 }
 
-main h1 {
+main h1,
+h2 {
   text-align: center;
 }
 
 .book-list {
+  margin: 1rem;
   border: 2px solid #000;
 }
 
@@ -55,6 +57,19 @@ main h1 {
 
 #add-books-form input {
   height: 30px;
-  border: 1px solid #000;
+  border: 3px solid #000;
   width: 100%;
+}
+
+button {
+  background-color: white;
+  border: solid black 2px;
+  box-shadow: 2px 3px 1px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 2px 3px 1px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 3px 1px 0px rgba(0, 0, 0, 0.75);
+}
+
+form button {
+  display: block;
+  margin-left: auto;
 }
