@@ -7,31 +7,6 @@ let newBook; // variable for book object that's pushed in array
 let title;
 let author;
 
-bookLists.forEach((book, index) => {
-    const bookInfo = document.createElement("div");
-    bookInfo.classList = "bookInfo";
-    bookInfo.id = index;
-
-    bookInfo.innerHTML = `
-        <p class="book-name">${book.title}</p>
-        <p class="book-author">${book.author}</p>
-    `;
-
-    const removeBtn = document.createElement("button");
-    removeBtn.classList = "remove-btn";
-    removeBtn.innerText = "Remove";
-
-    const hrLine = document.createElement("hr");
-
-    bookInfo.appendChild(removeBtn);
-    bookInfo.appendChild(hrLine);
-    bookList.prepend(bookInfo);
-
-    removeBtn.onclick = () => {
-        removeBook(book, index);
-    };
-})
-
 function addBook(bookObject){
   bookLists.push(bookObject);
 
@@ -48,8 +23,8 @@ function displayBook(bookObject, index){
   bookInfo.id = index;
 
   bookInfo.innerHTML = `
-    <p class="book-name">${newBook.title}</p>
-    <p class="book-author">${newBook.author}</p>
+    <p class="book-name">${bookObject.title}</p>
+    <p class="book-author">${bookObject.author}</p>
   `;
 
   const removeBtn = document.createElement('button');
@@ -74,6 +49,18 @@ function removeBook(bookObject, index){
   bookLists = bookLists.filter((book) => book.title !== title && book.author !== author);
   localStorage.setItem('booksCollection', JSON.stringify(bookLists));
   bookList.removeChild(bookInfo2);
+}
+
+// check local storage before adding a book
+if (localStorage.getItem('booksCollection')){
+  bookLists = JSON.parse(localStorage.getItem('booksCollection'));
+
+  bookLists.forEach((book, index) => {
+    displayBook(book, index);
+  });
+} else {
+  localStorage.setItem('booksCollection', '');
+  bookLists = [];
 }
 
 addBookForm.addEventListener('submit', function(e){
