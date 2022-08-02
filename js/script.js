@@ -1,23 +1,22 @@
-const addBookForm = document.getElementById("add-books-form");
-const bookList = document.querySelector(".book-list");
+const addBookForm = document.getElementById('add-books-form');
+const bookList = document.querySelector('.book-list');
 
-let storedBooks = JSON.parse(localStorage.getItem("booksCollection"));
-let bookLists = storedBooks ? storedBooks : [];
+const storedBooks = JSON.parse(localStorage.getItem('booksCollection'));
+let bookLists = storedBooks || [];
 let newBook; // variable for book object that's pushed in array
 let title;
 let author;
 
-function addBook(bookObject){
-  bookLists.push(bookObject);
+function removeBook(bookObject, index) {
+  const bookInfo2 = document.getElementById(index);
+  const { title, author } = bookObject;
 
+  bookLists = bookLists.filter((book) => book.title !== title && book.author !== author);
   localStorage.setItem('booksCollection', JSON.stringify(bookLists));
-  title.value = '';
-  author.value = '';
-  
-  displayBook(bookObject, bookLists.length - 1);
+  bookList.removeChild(bookInfo2);
 }
 
-function displayBook(bookObject, index){
+function displayBook(bookObject, index) {
   const bookInfo = document.createElement('div');
   bookInfo.classList = 'bookInfo';
   bookInfo.id = index;
@@ -42,17 +41,18 @@ function displayBook(bookObject, index){
   };
 }
 
-function removeBook(bookObject, index){
-  const bookInfo2 = document.getElementById(index);
-  const { title, author } = bookObject;
+function addBook(bookObject) {
+  bookLists.push(bookObject);
 
-  bookLists = bookLists.filter((book) => book.title !== title && book.author !== author);
   localStorage.setItem('booksCollection', JSON.stringify(bookLists));
-  bookList.removeChild(bookInfo2);
+  title.value = '';
+  author.value = '';
+
+  displayBook(bookObject, bookLists.length - 1);
 }
 
 // check local storage before adding a book
-if (localStorage.getItem('booksCollection')){
+if (localStorage.getItem('booksCollection')) {
   bookLists = JSON.parse(localStorage.getItem('booksCollection'));
 
   bookLists.forEach((book, index) => {
@@ -63,23 +63,22 @@ if (localStorage.getItem('booksCollection')){
   bookLists = [];
 }
 
-addBookForm.addEventListener('submit', function(e){
+addBookForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  
-  title = document.querySelector(".titleField");
-  author = document.querySelector(".authorField");
+
+  title = document.querySelector('.titleField');
+  author = document.querySelector('.authorField');
 
   if
   (title.value !== '' && author.value !== '') {
     newBook = {
-        title: title.value,
-        author: author.value
-    }
+      title: title.value,
+      author: author.value,
+    };
 
     addBook(newBook);
 
     title.value = '';
     author.value = '';
   }
-  
 });
