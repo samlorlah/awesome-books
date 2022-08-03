@@ -57,6 +57,13 @@ $ cd awesome-books
 - Twitter: [@chelmerrox](https://twitter.com/chelmerrox)
 - LinkedIn: [Losalini Rokocakau](https://www.linkedin.com/in/losaini-rokocakau/)
 
+
+👤 **Jon Zuka**
+
+- GitHub: [@gnuion](https://github.com/gnuion)
+- Twitter: [@gnuion](https://twitter.com/gnuion)
+- LinkedIn: [Jon Zuka](https://www.linkedin.com/in/jonzuka/)
+
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
