@@ -12,7 +12,7 @@ class Books {
     const { title, author } = bookObject;
 
     this.bookLists = this.bookLists.filter(
-      (book) => book.title !== title && book.author !== author
+      (book) => book.title !== title && book.author !== author,
     );
     localStorage.setItem('booksCollection', JSON.stringify(this.bookLists));
     bookList.removeChild(bookInfo2);
