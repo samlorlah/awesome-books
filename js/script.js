@@ -13,7 +13,7 @@ class Books {
     const { title, author } = bookObject;
 
     this.bookLists = this.bookLists.filter(
-      (book) => book.title !== title && book.author !== author
+      (book) => book.title !== title && book.author !== author,
     );
     localStorage.setItem('booksCollection', JSON.stringify(this.bookLists));
     bookList.removeChild(bookInfo2);
@@ -81,38 +81,37 @@ addBookForm.addEventListener('submit', (e) => {
   }
 });
 
-//DISPLAY DATE ON THE DOM
+// DISPLAY DATE ON THE DOM
+/* function updateTime() {
+  setTimeout(() => {realTime()}, 1000);
+} */
 
-function updateTime() {
-  setTimeout('realTime()', 1000);
-}
-
-function realTime() {
-  let date = new Date();
-  let dateOptions = {
+const realTime = () => {
+  const date = new Date();
+  const dateOptions = {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
   };
 
-  let timeOptions = {
+  const timeOptions = {
     hour: 'numeric',
     minute: 'numeric',
     second: 'numeric',
     hour12: true,
   };
 
-  let currentDate = date.toLocaleDateString('en-GB', dateOptions);
-  let currentTime = date.toLocaleTimeString('en-GB', timeOptions);
-  displayDate.innerHTML = currentDate + ' ' + currentTime;
+  const currentDate = date.toLocaleDateString('en-GB', dateOptions);
+  const currentTime = date.toLocaleTimeString('en-GB', timeOptions);
+  displayDate.innerHTML = `${currentDate} ${currentTime}`;
 
-  updateTime();
-}
+  setTimeout(() => { realTime(); }, 1000);
+};
 
 realTime();
 
 const navLinks = Array.from(
-  document.body.querySelectorAll('header nav ul li a')
+  document.body.querySelectorAll('header nav ul li a'),
 );
 
 const sections = Array.from(document.body.querySelectorAll('section'));
@@ -122,7 +121,7 @@ navLinks.forEach((navLink) => {
     const idForSectionToShow = navLink.getAttribute('href');
     sections.forEach((section) => {
       const id = section.getAttribute('id');
-      if ('#' + id === idForSectionToShow) {
+      if (`#${id}` === idForSectionToShow) {
         section.classList.remove('hidden');
       } else {
         section.classList.add('hidden');
