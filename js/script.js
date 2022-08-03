@@ -2,7 +2,7 @@ const addBookForm = document.getElementById('add-books-form');
 const bookList = document.querySelector('.book-list');
 
 class Books {
-  constructor(bookLists = []){
+  constructor(bookLists = []) {
     this.bookLists = bookLists;
     this.getFromLocal();
   }
@@ -11,7 +11,9 @@ class Books {
     const bookInfo2 = document.getElementById(index);
     const { title, author } = bookObject;
 
-    this.bookLists = this.bookLists.filter((book) => book.title !== title && book.author !== author);
+    this.bookLists = this.bookLists.filter(
+      (book) => book.title !== title && book.author !== author
+    );
     localStorage.setItem('booksCollection', JSON.stringify(this.bookLists));
     bookList.removeChild(bookInfo2);
   }
@@ -45,7 +47,7 @@ class Books {
     this.displayBook(bookObject, this.bookLists.length - 1);
   }
 
-  getFromLocal(){
+  getFromLocal() {
     // check local storage before adding a book
     if (localStorage.getItem('booksCollection')) {
       this.bookLists = JSON.parse(localStorage.getItem('booksCollection'));
@@ -68,8 +70,7 @@ addBookForm.addEventListener('submit', (e) => {
   const title = document.querySelector('.titleField');
   const author = document.querySelector('.authorField');
 
-  if
-  (title.value !== '' && author.value !== '') {
+  if (title.value !== '' && author.value !== '') {
     const newBook = {
       title: title.value,
       author: author.value,
