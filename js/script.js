@@ -1,5 +1,6 @@
 const addBookForm = document.getElementById('add-books-form');
 const bookList = document.querySelector('.book-list');
+const displayDate = document.querySelector('.date');
 
 class Books {
   constructor(bookLists = []) {
@@ -79,3 +80,34 @@ addBookForm.addEventListener('submit', (e) => {
     books.addBook(newBook);
   }
 });
+
+//DISPLAY DATE ON THE DOM
+
+
+function updateTime() {
+  setTimeout('realTime()', 1000);
+}
+
+function realTime() {
+  let date = new Date();
+  let dateOptions = {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  };
+
+  let timeOptions = {
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hour12: true,
+  };
+
+  let currentDate = date.toLocaleDateString("en-GB", dateOptions);
+  let currentTime = date.toLocaleTimeString("en-GB", timeOptions);
+  displayDate.innerHTML = currentDate + " " + currentTime;
+
+  updateTime();
+}
+
+realTime();
