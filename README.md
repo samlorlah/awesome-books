@@ -9,7 +9,7 @@
 
 ## Live Demo
 
-[Live Demo Link](https://raw.githack.com/samlorlah/awesome-books/milestone-1/index.html)
+[Live Demo Link](https://samlorlah.github.io/awesome-books/)
 
 ## Getting Started
 
