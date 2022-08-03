@@ -59,6 +59,11 @@ h2 {
   width: 100%;
 }
 
+#add-books-form input::placeholder {
+  color: #000;
+  font-size: 17px;
+}
+
 button {
   background-color: white;
   border: solid black 2px;
