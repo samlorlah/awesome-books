@@ -78,14 +78,11 @@ addBookForm.addEventListener('submit', (e) => {
     };
 
     books.addBook(newBook);
+    addBookForm.reset();
   }
 });
 
 // DISPLAY DATE ON THE DOM
-/* function updateTime() {
-  setTimeout(() => {realTime()}, 1000);
-} */
-
 const realTime = () => {
   const date = new Date();
   const dateOptions = {
