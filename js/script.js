@@ -1,83 +1,81 @@
 const addBookForm = document.getElementById('add-books-form');
 const bookList = document.querySelector('.book-list');
 
-let bookLists = [];
-let newBook; // variable for book object that's pushed in array
-let title;
-let author;
+class Books {
+  constructor(bookLists = []) {
+    this.bookLists = bookLists;
+    this.getFromLocal();
+  }
 
-function removeBook(bookObject, index) {
-  const bookInfo2 = document.getElementById(index);
-  const { title, author } = bookObject;
+  removeBook(bookObject, index) {
+    const bookInfo2 = document.getElementById(index);
+    const { title, author } = bookObject;
 
-  bookLists = bookLists.filter((book) => book.title !== title && book.author !== author);
-  localStorage.setItem('booksCollection', JSON.stringify(bookLists));
-  bookList.removeChild(bookInfo2);
+    this.bookLists = this.bookLists.filter(
+      (book) => book.title !== title && book.author !== author,
+    );
+    localStorage.setItem('booksCollection', JSON.stringify(this.bookLists));
+    bookList.removeChild(bookInfo2);
+  }
+
+  displayBook(bookObject, index) {
+    const bookInfo = document.createElement('div');
+    bookInfo.classList = 'bookInfo';
+    bookInfo.id = index;
+
+    bookInfo.innerHTML = `
+      <p class="book-details">"${bookObject.title}" by ${bookObject.author}</p>
+    `;
+
+    const removeBtn = document.createElement('button');
+    removeBtn.classList = 'remove-btn';
+    removeBtn.innerText = 'Remove';
+
+    bookInfo.appendChild(removeBtn);
+    bookList.prepend(bookInfo);
+
+    removeBtn.onclick = () => {
+      this.removeBook(bookObject, index);
+    };
+  }
+
+  addBook(bookObject) {
+    this.bookLists.push(bookObject);
+
+    localStorage.setItem('booksCollection', JSON.stringify(this.bookLists));
+
+    this.displayBook(bookObject, this.bookLists.length - 1);
+  }
+
+  getFromLocal() {
+    // check local storage before adding a book
+    if (localStorage.getItem('booksCollection')) {
+      this.bookLists = JSON.parse(localStorage.getItem('booksCollection'));
+
+      this.bookLists.forEach((book, index) => {
+        this.displayBook(book, index);
+      });
+    } else {
+      localStorage.setItem('booksCollection', '');
+      this.bookLists = [];
+    }
+  }
 }
 
-function displayBook(bookObject, index) {
-  const bookInfo = document.createElement('div');
-  bookInfo.classList = 'bookInfo';
-  bookInfo.id = index;
-
-  bookInfo.innerHTML = `
-    <p class="book-name">${bookObject.title}</p>
-    <p class="book-author">${bookObject.author}</p>
-  `;
-
-  const removeBtn = document.createElement('button');
-  removeBtn.classList = 'remove-btn';
-  removeBtn.innerText = 'Remove';
-
-  const hrLine = document.createElement('hr');
-
-  bookInfo.appendChild(removeBtn);
-  bookInfo.appendChild(hrLine);
-  bookList.prepend(bookInfo);
-
-  removeBtn.onclick = () => {
-    removeBook(bookObject, index);
-  };
-}
-
-function addBook(bookObject) {
-  bookLists.push(bookObject);
-
-  localStorage.setItem('booksCollection', JSON.stringify(bookLists));
-  title.value = '';
-  author.value = '';
-
-  displayBook(bookObject, bookLists.length - 1);
-}
-
-// check local storage before adding a book
-if (localStorage.getItem('booksCollection')) {
-  bookLists = JSON.parse(localStorage.getItem('booksCollection'));
-
-  bookLists.forEach((book, index) => {
-    displayBook(book, index);
-  });
-} else {
-  localStorage.setItem('booksCollection', '');
-  bookLists = [];
-}
+const books = new Books();
 
 addBookForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  title = document.querySelector('.titleField');
-  author = document.querySelector('.authorField');
+  const title = document.querySelector('.titleField');
+  const author = document.querySelector('.authorField');
 
-  if
-  (title.value !== '' && author.value !== '') {
-    newBook = {
+  if (title.value !== '' && author.value !== '') {
+    const newBook = {
       title: title.value,
       author: author.value,
     };
 
-    addBook(newBook);
-
-    title.value = '';
-    author.value = '';
+    books.addBook(newBook);
   }
 });
