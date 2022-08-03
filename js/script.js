@@ -1,5 +1,6 @@
 const addBookForm = document.getElementById('add-books-form');
 const bookList = document.querySelector('.book-list');
+const displayDate = document.querySelector('.date');
 
 class Books {
   constructor(bookLists = []) {
@@ -78,4 +79,53 @@ addBookForm.addEventListener('submit', (e) => {
 
     books.addBook(newBook);
   }
+});
+
+// DISPLAY DATE ON THE DOM
+/* function updateTime() {
+  setTimeout(() => {realTime()}, 1000);
+} */
+
+const realTime = () => {
+  const date = new Date();
+  const dateOptions = {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  };
+
+  const timeOptions = {
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: true,
+  };
+
+  const currentDate = date.toLocaleDateString('en-GB', dateOptions);
+  const currentTime = date.toLocaleTimeString('en-GB', timeOptions);
+  displayDate.innerHTML = `${currentDate} ${currentTime}`;
+
+  setTimeout(() => { realTime(); }, 1000);
+};
+
+realTime();
+
+const navLinks = Array.from(
+  document.body.querySelectorAll('header nav ul li a'),
+);
+
+const sections = Array.from(document.body.querySelectorAll('section'));
+
+navLinks.forEach((navLink) => {
+  navLink.addEventListener('click', () => {
+    const idForSectionToShow = navLink.getAttribute('href');
+    sections.forEach((section) => {
+      const id = section.getAttribute('id');
+      if (`#${id}` === idForSectionToShow) {
+        section.classList.remove('hidden');
+      } else {
+        section.classList.add('hidden');
+      }
+    });
+  });
 });

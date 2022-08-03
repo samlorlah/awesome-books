@@ -9,7 +9,7 @@
 
 ## Live Demo
 
-[Live Demo Link](https://raw.githack.com/samlorlah/awesome-books/milestone-1/index.html)
+[Live Demo Link](https://samlorlah.github.io/awesome-books/)
 
 ## Getting Started
 
@@ -56,6 +56,13 @@ $ cd awesome-books
 - GitHub: [@chelmerrox](https://github.com/chelmerrox)
 - Twitter: [@chelmerrox](https://twitter.com/chelmerrox)
 - LinkedIn: [Losalini Rokocakau](https://www.linkedin.com/in/losaini-rokocakau/)
+
+
+👤 **Jon Zuka**
+
+- GitHub: [@gnuion](https://github.com/gnuion)
+- Twitter: [@gnuion](https://twitter.com/gnuion)
+- LinkedIn: [Jon Zuka](https://www.linkedin.com/in/jonzuka/)
 
 ## 🤝 Contributing
 
